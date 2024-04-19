@@ -1,0 +1,181 @@
+/* .nav-list */
+body{
+  font-size: 16px;
+}
+ul{
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.maskbody{
+  background-color: rgba(0,0,0,.5);
+  position: fixed;
+  top: 6.125rem;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+.text-blue{
+  color:#006bb2;
+}
+section.order-nav{
+  margin-bottom:0.6rem;
+}
+.order-nav .order-box{
+  position: relative;
+}
+.order-nav .nav-list{
+  width: 100%;
+  padding:0.8rem 0rem;
+  font-size: 1rem;
+  border-bottom: 1px solid #dbdbdb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content:space-around;
+  background:#fff;
+}
+.order-nav .nav-list .icon{
+  width: 1.2rem;
+  height: 1.2rem;
+  display: inline-block;
+}
+.order-nav .nav-list .icon-filter{
+  float: right;
+  margin-top: 2px;
+   background: url(images/filter.png) no-repeat; 
+  /*background: url(../themes/mobile/images/filter.png) no-repeat;*/
+  background-size: 100%;
+}
+.order-nav .nav-list .active{
+  color:#006bb2;
+}
+/* filter-label */
+.order-nav .filter-label{
+  display: none;
+  padding: 0.3rem 1.025rem;
+  background-color: #f6f6f6;
+  position: relative;
+  height: 1.88rem;
+  overflow: hidden;
+}
+.order-nav .filter-label .label-list{
+    height: 2rem;
+    overflow-x: auto;
+    overflow-y:hidden ;
+    position: relative;
+}
+.order-nav .filter-label .label-list::-webkit-scrollbar {
+    display: none;
+}
+.order-nav .filter-label .label-list ul{
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    height: 1.88rem;
+    overflow-x: auto;  
+    white-space: nowrap;
+    display: flex;
+    padding-right: 4rem;
+}
+.order-nav .filter-label .label-list ul li{
+  display: inline-block;
+  padding: 0.25rem 0.425rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.2rem;
+  -webkit-border-radius: 0.2rem;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem; 
+  margin-right: 0.6rem;
+  float: left;
+}
+.order-nav .filter-label ul li span.li-close:after{
+  content: "\2716";
+  color: #999;
+  margin-left: 0.6rem;
+}
+.order-nav .filter-label .clear-label{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-color:#f6f6f6;
+  box-shadow: -0.2rem 0 0.4rem -0.2rem #ccc;
+  padding: 0.66rem 1rem;  
+  font-size: 0.9rem;
+}
+.order-nav .filter-label .clear-label a{
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.2rem;
+  -webkit-border-radius: 0.2rem;
+} 
+
+/* nav-area */
+.order-nav .nav-area{
+  position: absolute;
+  top: 3rem;
+}
+.order-nav .nav-area .slide{
+  font-size: .9rem;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 104;
+  display: none;
+  overflow-y: auto;
+  background-color: #fff;
+  
+}
+.order-nav .nav-area .slide ul{
+  margin: 0.8rem 1.025rem 0;
+  overflow: hidden;
+}
+
+.order-nav .nav-area .slide .label{
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  text-align: center;
+  margin-bottom: 0.6rem;  
+}
+.order-nav .nav-area .slide .label a.selected{
+  border: 1px solid #006bb2;
+  background: #006bb2;
+  color: #fff;
+}
+.order-nav .nav-area .slide .label a{
+  display: inline-block;
+  overflow: hidden;
+  width: 4.6rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.2rem;
+  -webkit-border-radius: 0.2rem;
+  line-height: 2rem;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem; 
+}
+.order-nav .nav-area .slide .btn-group{
+  border-top:1px solid #dbdbdb;
+  overflow: hidden;
+}
+.order-nav .nav-area .slide .btn-group .btn{
+  float: left;
+  width: 50%;
+  text-align: center;
+  padding: 0.8rem 0;
+  
+}
+.order-nav .nav-area .slide .btn-group .btn:first-child{
+  box-sizing: border-box;
+  border-right: 1px solid #dbdbdb;
+}
