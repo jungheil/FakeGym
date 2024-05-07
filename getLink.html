@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="./static/img/getlink.svg">
+
+  <title>如约 - 大山中学体育场馆预约模拟器</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <!-- <link href="narrow-jumbotron.css" rel="stylesheet"> -->
+  <style data-id="immersive-translate-input-injected-css">
+    .immersive-translate-input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 2147483647;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .immersive-translate-loading-spinner {
+      vertical-align: middle !important;
+      width: 10px !important;
+      height: 10px !important;
+      display: inline-block !important;
+      margin: 0 4px !important;
+      border: 2px rgba(221, 244, 255, 0.6) solid !important;
+      border-top: 2px rgba(0, 0, 0, 0.375) solid !important;
+      border-left: 2px rgba(0, 0, 0, 0.375) solid !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      -webkit-animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+      animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+    }
+
+    @-webkit-keyframes immersive-translate-loading-animation {
+      from {
+        -webkit-transform: rotate(0deg);
+      }
+
+      to {
+        -webkit-transform: rotate(359deg);
+      }
+    }
+
+    @keyframes immersive-translate-loading-animation {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(359deg);
+      }
+    }
+
+
+    .immersive-translate-input-loading {
+      --loading-color: #f78fb6;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: block;
+      margin: 12px auto;
+      position: relative;
+      color: white;
+      left: -100px;
+      box-sizing: border-box;
+      animation: immersiveTranslateShadowRolling 1.5s linear infinite;
+    }
+
+    @keyframes immersiveTranslateShadowRolling {
+      0% {
+        box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+      }
+
+      12% {
+        box-shadow: 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+      }
+
+      25% {
+        box-shadow: 110px 0 var(--loading-color), 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+      }
+
+      36% {
+        box-shadow: 120px 0 var(--loading-color), 110px 0 var(--loading-color), 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0);
+      }
+
+      50% {
+        box-shadow: 130px 0 var(--loading-color), 120px 0 var(--loading-color), 110px 0 var(--loading-color), 100px 0 var(--loading-color);
+      }
+
+      62% {
+        box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color), 120px 0 var(--loading-color), 110px 0 var(--loading-color);
+      }
+
+      75% {
+        box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color), 120px 0 var(--loading-color);
+      }
+
+      87% {
+        box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color);
+      }
+
+      100% {
+        box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+
+    .immersive-translate-search-recomend {
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      font-size: 16px;
+    }
+
+    .immersive-translate-search-enhancement-en-title {
+      color: #4d5156;
+    }
+
+    /* dark */
+    @media (prefers-color-scheme: dark) {
+      .immersive-translate-search-recomend {
+        border: 1px solid #3c4043;
+      }
+
+      .immersive-translate-close-action svg {
+        fill: #bdc1c6;
+      }
+
+      .immersive-translate-search-enhancement-en-title {
+        color: #bdc1c6;
+      }
+    }
+
+
+    .immersive-translate-search-settings {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      cursor: pointer;
+    }
+
+    .immersive-translate-search-recomend::before {
+      /* content: " "; */
+      /* width: 20px; */
+      /* height: 20px; */
+      /* top: 16px; */
+      /* position: absolute; */
+      /* background: center / contain url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAxlBMVEUAAADpTInqTIjpSofnSIfqS4nfS4XqS4nqTIjsTYnrTInqTIroS4jvQIDqTIn////+/v7rSYjpTIn8/v7uaZzrTIr9/f3wfansWJL88/b85e73qc39+/v3xNnylrvrVI/98fb62Obva5/8+fr76vH4y9zpSIj74e353Oj1ocTzm77xhK/veKbtYpjsXJTqU47oTInxjrXyh7L99fj40eH2ttH1udD3sc31ssz1rMnykLXucqPtbqD85e/1xdn2u9DzqcXrUY6FaJb8AAAADnRSTlMA34BgIM8Q37/fz7+/EGOHcVQAAAGhSURBVDjLhZPncuowEEZFTW7bXVU7xsYYTO/p7bb3f6lICIOYJOT4h7/VnFmvrBFjrF3/CR/SajBHswafctG0Qg3O8O0Xa8BZ6uw7eLjqr30SofCDVSkemMinfL1ecy20r5ygR5zz3ArcAqJExPTPKhDENEmS30Q9+yo4lEQkqVTiIEAHCT10xWERRdH0Bq0aCOPZNDV3s0xaYce1lHEoDHU8wEh3qRJypNcTAeKUIjgKMeGLDoRCLVLTVf+Ownj8Kk6H9HM6QXPgYjQSB0F00EJEu10ILQrs/QeP77BSSr0MzLOyuJJQbnUoOOIUI/A8EeJk9E4YUHUWiRyTVKGgQUB8/3e/NpdGlfI+FMQyWsCBWyz4A/ZyHXyiiz0Ne5aGZssoxRmcChw8/EFKQ5JwwkUo3FRT5yXS7q+Y/rHDZmFktzpGMvO+5QofA4FPpEmGw+EWRCFvnaof7Zhe8NuYSLR0xErKLThUSs8gnODh87ssy6438yzbLzxl012HS19vfCf3CNhnbWOL1eEsDda+gDPUvri8tSZzNFrwIZf1NmNvqC1I/t8j7nYAAAAASUVORK5CYII='); */
+    }
+
+    .immersive-translate-search-title {}
+
+    .immersive-translate-search-title-wrapper {}
+
+    .immersive-translate-search-time {
+      font-size: 12px;
+      margin: 4px 0 24px;
+      color: #70757a;
+    }
+
+    .immersive-translate-expand-items {
+      display: none;
+    }
+
+    .immersive-translate-search-more {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .immersive-translate-modal {
+      display: none;
+      position: fixed;
+      z-index: 2147483647;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      font-size: 15px;
+    }
+
+    .immersive-translate-modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 40px 24px 24px;
+      border: 1px solid #888;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 270px;
+      font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Ubuntu",
+        "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
+      position: relative
+    }
+
+    .immersive-translate-modal .immersive-translate-modal-content-in-input {
+      max-width: 500px;
+    }
+
+    .immersive-translate-modal-content-in-input .immersive-translate-modal-body {
+      text-align: left;
+      max-height: unset;
+    }
+
+    .immersive-translate-modal-title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .immersive-translate-modal-body {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333;
+      word-break: break-all;
+      margin-top: 24px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .immersive-translate-modal-body {
+        max-height: 250px;
+        overflow-y: auto;
+      }
+    }
+
+    .immersive-translate-close {
+      color: #666666;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .immersive-translate-close:hover,
+    .immersive-translate-close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .immersive-translate-modal-footer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .immersive-translate-btn {
+      width: fit-content;
+      color: #fff;
+      background-color: #ea4c89;
+      border: none;
+      font-size: 16px;
+      margin: 0 8px;
+      padding: 9px 30px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .immersive-translate-btn:hover {
+      background-color: #f082ac;
+    }
+
+    .immersive-translate-cancel-btn {
+      /* gray color */
+      background-color: rgb(89, 107, 120);
+    }
+
+
+    .immersive-translate-cancel-btn:hover {
+      background-color: hsl(205, 20%, 32%);
+    }
+
+    .immersive-translate-action-btn {
+      background-color: transparent;
+      color: #EA4C89;
+      border: 1px solid #EA4C89
+    }
+
+    .immersive-translate-btn svg {
+      margin-right: 5px;
+    }
+
+    .immersive-translate-link {
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-drag: none;
+      text-decoration: none;
+      color: #007bff;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, .1);
+    }
+
+    .immersive-translate-primary-link {
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-drag: none;
+      text-decoration: none;
+      color: #ea4c89;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, .1);
+    }
+
+    .immersive-translate-modal input[type="radio"] {
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    .immersive-translate-modal label {
+      cursor: pointer;
+    }
+
+    .immersive-translate-close-action {
+      position: absolute;
+      top: 2px;
+      right: 0px;
+      cursor: pointer;
+    }
+  </style>
+  <style type="text/css">
+    .lf-progress {
+      -webkit-appearance: none;
+      -moz-apperance: none;
+      width: 100%;
+      /* margin: 0 10px; */
+      height: 4px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .lf-progress:focus {
+      outline: none;
+      border: none;
+    }
+
+    .lf-progress::-moz-range-track {
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    .lf-progress::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      height: 13px;
+      width: 13px;
+      border: 0;
+      border-radius: 50%;
+      background: #0fccce;
+      cursor: pointer;
+    }
+
+    .lf-progress::-moz-range-thumb {
+      -moz-appearance: none !important;
+      height: 13px;
+      width: 13px;
+      border: 0;
+      border-radius: 50%;
+      background: #0fccce;
+      cursor: pointer;
+    }
+
+    .lf-progress::-ms-track {
+      width: 100%;
+      height: 3px;
+      cursor: pointer;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+
+    .lf-progress::-ms-fill-lower {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .lf-progress::-ms-fill-upper {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .lf-progress::-ms-thumb {
+      border: 0;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #0fccce;
+      cursor: pointer;
+    }
+
+    .lf-progress:focus::-ms-fill-lower {
+      background: #ccc;
+    }
+
+    .lf-progress:focus::-ms-fill-upper {
+      background: #ccc;
+    }
+
+    .lf-player-container :focus {
+      outline: 0;
+    }
+
+    .lf-popover {
+      position: relative;
+    }
+
+    .lf-popover-content {
+      display: inline-block;
+      position: absolute;
+      opacity: 1;
+      visibility: visible;
+      transform: translate(0, -10px);
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+    }
+
+    .lf-popover-content.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(0, 0px);
+    }
+
+    .lf-player-btn-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .lf-player-btn {
+      cursor: pointer;
+      fill: #999;
+      width: 14px;
+    }
+
+    .lf-player-btn.active {
+      fill: #555;
+    }
+
+    .lf-popover {
+      position: relative;
+    }
+
+    .lf-popover-content {
+      display: inline-block;
+      position: absolute;
+      background-color: #ffffff;
+      opacity: 1;
+
+      transform: translate(0, -10px);
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+      padding: 10px;
+    }
+
+    .lf-popover-content.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(0, 0px);
+    }
+
+    .lf-arrow {
+      position: absolute;
+      z-index: -1;
+      content: '';
+      bottom: -9px;
+      border-style: solid;
+      border-width: 10px 10px 0px 10px;
+    }
+
+    .lf-left-align,
+    .lf-left-align .lfarrow {
+      left: 0;
+      right: unset;
+    }
+
+    .lf-right-align,
+    .lf-right-align .lf-arrow {
+      right: 0;
+      left: unset;
+    }
+
+    .lf-text-input {
+      border: 1px #ccc solid;
+      border-radius: 5px;
+      padding: 3px;
+      width: 60px;
+      margin: 0;
+    }
+
+    .lf-color-picker {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 90px;
+    }
+
+    .lf-color-selectors {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .lf-color-component {
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lf-color-component strong {
+      width: 40px;
+    }
+
+    .lf-color-component input[type='range'] {
+      margin: 0 0 0 10px;
+    }
+
+    .lf-color-component input[type='number'] {
+      width: 50px;
+      margin: 0 0 0 10px;
+    }
+
+    .lf-color-preview {
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 5px;
+    }
+
+    .lf-preview {
+      height: 60px;
+      width: 60px;
+    }
+
+    .lf-popover-snapshot {
+      width: 150px;
+    }
+
+    .lf-popover-snapshot h5 {
+      margin: 5px 0 10px 0;
+      font-size: 0.75rem;
+    }
+
+    .lf-popover-snapshot a {
+      display: block;
+      text-decoration: none;
+    }
+
+    .lf-popover-snapshot a:before {
+      content: '⥼';
+      margin-right: 5px;
+    }
+
+    .lf-popover-snapshot .lf-note {
+      display: block;
+      margin-top: 10px;
+      color: #999;
+    }
+
+    .lf-player-controls>div {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+
+    .lf-player-controls>div:first-child {
+      margin-left: 0px;
+    }
+
+    .lf-player-controls>div:last-child {
+      margin-right: 0px;
+    }
+  </style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1066.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1066.0">
+  <script type="text/javascript" src="./static/js/jquery.js"></script>
+  <script type="text/javascript" src="./static/script/getLink.js"></script>
+  <script>
+    function showUserAgreement() {
+      var userAgreement = document.getElementById("userAgreement");
+      if (userAgreement.style.display == "none") {
+        userAgreement.style.display = "block";
+      } else {
+        userAgreement.style.display = "none";
+      }
+    }
+    function showPrivatePolicy() {
+      var privatePolicy = document.getElementById("privatePolicy");
+      if (privatePolicy.style.display == "none") {
+        privatePolicy.style.display = "block";
+      } else {
+        privatePolicy.style.display = "none";
+      }
+    }
+  </script>
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="container" style="float: none; position: relative;">
+
+
+    <div class="jumbotron" style="float: none; text-align: center;">
+      <h1 class="display-3" style="text-align: center;" spellcheckker="false" data-gramm="false" wt-ignore-input="true">
+        如约</h1>
+      <p class="lead" style="text-align: center;">大山中学体育场馆预约模拟器</p>
+
+      <p class="lead" style="text-align: center;">填写以下信息一键生成网页，其中带*为必填项。将生成的链接复制进企业微信开始运动！</p>
+
+      <p></p>
+    </div>
+
+    <div class="row marketing">
+      <div class="col-lg-12" style="position: static;">
+
+        <div id="orderInfo">
+          <div class="form-group" style=""><label>*你的名字</label><input type="text" class="form-control input-info"
+              id="userName"></div>
+          <div class="form-group" style=""><label>*学号</label><input type="text" class="form-control input-info"
+              id="userId"></div>
+          <div class="form-group" style=""><label>*场地预设</label>
+            <select class="form-control" id="venueType">
+              <option value="value1">场地</option>
+            </select>
+          </div>
+          <div class="form-group" style=""><label>订单号</label><input type="text" class="form-control input-info"
+              id="orderId">
+          </div>
+          <div class="form-group" style=""><label>验证码</label><input type="text" class="form-control input-info"
+              id="vertifyCode">
+          </div>
+          <div class="form-group" style=""><label>场地名称（例：深圳校区羽毛球场）</label><input type="text"
+              class="form-control input-info" id="venueName">
+          </div>
+          <div class="form-group" style=""><label>场地号码（例：场地1）</label><input type="text" class="form-control input-info"
+              id="venueId"></div>
+          <div class="form-group" style=""><label>预约日期（例：2024-01-01）</label><input type="text"
+              class="form-control input-info" id="venueDate">
+          </div>
+          <div class="form-group" style=""><label>预约时间（例：08:00-09:00）</label><input type="text"
+              class="form-control input-info" id="venueTime">
+          </div>
+          <div class="form-group" style=""><label>场地金额（例：30.00）</label><input type="text"
+              class="form-control input-info" id="moneyAmount"></div>
+        </div>
+        <hr>
+        <div>
+          <div class="form-group" style="" data-quillbot-parent="1xu8dynhL5cOQvFqyK6Pj">
+            <label>链接：</label><quillbot-extension-highlights data-element-id="1xu8dynhL5cOQvFqyK6Pj"
+              data-element-type="text"
+              style="display: initial; visibility: initial; opacity: initial; clip-path: initial; position: relative; float: left; top: 0px; left: 0px; z-index: 1 !important; pointer-events: none;"></quillbot-extension-highlights><textarea
+              id="showUrl" class="form-control" data-gramm="false" wt-ignore-input="true" readonly
+              data-quillbot-element="1xu8dynhL5cOQvFqyK6Pj"></textarea>
+          </div>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" id="checkAgreement" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            我已阅读并同意<a href="javascript:void(0)" , onclick="showUserAgreement()">用户协议</a>和<a href="javascript:void(0)" ,
+              onclick="showPrivatePolicy()">隐私政策</a>
+          </label>
+        </div>
+
+        <div class="alert alert-info" id="userAgreement" role="alert" style="display:none">
+          <b>用户协议</b><br>
+          1. 如约（大山中学体育馆预约模拟器）刊载的所有内容，包括文字、图片、音频、视频、软件、程序、以及网页版式设计等均在网上搜集。<br>
+          2. 本站提供的内容仅用于个人学习、研究或欣赏。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。<br>
+          3. 访问者可将本网站提供的内容或服务用于个人学习、研究或欣赏，以及其他非商业性或非盈利性用途，但同时应遵守著作权法及其他相关法律的规定，不得侵犯本网站及相关权利人的合法权利。<br>
+          4. 本站内容原作者如不愿意在本网站刊登内容，请及时通知本站，予以删除。
+        </div>
+        <div class="alert alert-info" id="privatePolicy" role="alert" style="display:none">
+          <b>隐私政策</b><br>
+          1. 如约（大山中学体育馆预约模拟器）重视对你隐私的保护，本站无存储功能，不会对你的任何个人信息进行收集。<br>
+          2. 本站不会泄露你的任何个人信息，但是请注意，你的个人信息可能会被第三方截取，本站不对此负责。<br>
+          3. 本站的浏览量、访客数统计功能由第三方（不蒜子）提供，本站不会对你的浏览次数进行收集。
+        </div>
+
+        <div class=" col-lg-12" style="float: none; text-align: center;">
+          <div class="btn-group" role="group" aria-label="Basic example" style=""><button type="button"
+              class="btn btn-secondary" id="copyUrl">复制链接</button> <button type="button" class="btn btn-secondary"
+              id="openUrl">转到链接</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <footer class="footer">
+      <div class=" col-lg-12" style="float: none; text-align: center;">
+        <p>© jXXXXXXX 2024</p>
+        <div class="busuanzi-count">
+          <span class="post-meta-item" id="busuanzi_container_site_pv">
+            <span class="post-meta-item-icon">
+              浏览量：
+            </span>
+            <span class="site-pv" title="访客数">
+              <span id="busuanzi_value_site_pv">0</span>
+            </span>
+          </span>
+          <span class="post-meta-divider">&nbsp|&nbsp</span>
+          <span class="post-meta-item" id="busuanzi_container_site_uv">
+            访客数：
+            <span class="site-uv" title="访问量">
+              <span id="busuanzi_value_site_uv">0</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /container -->
+
+
+  <quillbot-extension data-element-id="1xu8dynhL5cOQvFqyK6Pj"
+    style="display: none; visibility: initial; opacity: initial; clip-path: initial; pointer-events: none; left: 696px; position: absolute !important; top: 776px !important; bottom: auto !important; z-index: 0;"></quillbot-extension>
+</body><quillbot-mirror data-element-id="1xu8dynhL5cOQvFqyK6Pj"
+  style="display: initial; visibility: initial; opacity: initial; clip-path: initial;"></quillbot-mirror><quillbot-extension-portal
+  style="display: initial; visibility: initial; opacity: initial; clip-path: initial;"></quillbot-extension-portal><quillbot-extension-root
+  style="display: initial; visibility: initial; opacity: initial; clip-path: initial;"></quillbot-extension-root><grammarly-desktop-integration
+  data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+</html>

@@ -4,7 +4,7 @@ function getURLParameter(name) {
       (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
         window.location.search
       ) || [null, ""])[1].replace(/\+/g, "%20")
-    ) || null
+    ) || ""
   );
 }
 
@@ -20,7 +20,7 @@ var orderInfo = {
   orderTime: "",
 };
 
-var venueTypes = {
+const venueTypes = {
   szswim: {
     venueName: "深圳校区游泳池",
     moneyAmount: "5.00",
@@ -42,6 +42,24 @@ var venueTypes = {
     moneyAmount: "3.00",
     venueTimes: [
       "10:00-11:00",
+      "11:01-12:00",
+      "14:00-15:00",
+      "15:01-16:00",
+      "16:01-17:00",
+      "17:01-18:00",
+      "18:01-19:00",
+      "19:01-20:00",
+      "20:01-21:00",
+      "21:01-22:00",
+    ],
+  },
+  szbadminton: {
+    venueName: "深圳校区羽毛球场",
+    moneyAmount: "30.00",
+    venueTimes: [
+      "08:00-09:00",
+      "09:01-10:00",
+      "10:01-11:00",
       "11:01-12:00",
       "14:00-15:00",
       "15:01-16:00",
@@ -128,7 +146,7 @@ function getRandHistoryOrder(num) {
       hour12: false,
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit"
+      second: "2-digit",
     });
     horder.venueDate = new Date(randDate[i].getTime() + 1000 * 60 * 60 * 24)
       .toLocaleDateString("zh-CN", {
@@ -154,9 +172,9 @@ function getVenueTime(venueTimes) {
           day: "2-digit",
         })
         .replace(/\//g, "-") +
-      "T" +
-      time.split("-")[0] +
-      ":00"
+        "T" +
+        time.split("-")[0] +
+        ":00"
     );
   });
 
@@ -169,9 +187,9 @@ function getVenueTime(venueTimes) {
           day: "2-digit",
         })
         .replace(/\//g, "-") +
-      "T" +
-      time.split("-")[1] +
-      ":00"
+        "T" +
+        time.split("-")[1] +
+        ":00"
     );
   });
 
@@ -189,38 +207,72 @@ function getVenueTime(venueTimes) {
   return venueTimes[venueTimes.length - 1];
 }
 
-function initPageData() {
-  var venueType = getURLParameter("venueType");
-  var userName = getURLParameter("userName");
-  var userId = getURLParameter("userId");
-
-  if (venueType == null || venueType == "") {
+function initPageData(
+  venueType,
+  userName,
+  userId,
+  orderId,
+  vertifyCode,
+  venueName,
+  venueId,
+  venueDate,
+  venueTime,
+  moneyAmount
+) {
+  if (venueType == "" || !(venueType in venueTypes)) {
     venueType = "szswim";
   }
-  if (userName == null || userName == "") {
+  if (userName == "") {
     userName = "麦扩";
   }
-  if (userId == null || userId == "") {
+  if (userId == "") {
     userId = "22210086";
   }
 
   var historyOrder = getRandHistoryOrder(7);
   let mainOrder = { ...orderInfo };
 
-  mainOrder.orderId = randOrderId(
-    (min = historyOrder[historyOrder.length - 1].orderId + 1)
-  );
-  mainOrder.vertifyCode = randVertifyCode();
-  mainOrder.venueName = venueTypes[venueType].venueName;
-  mainOrder.venueDate = new Date()
-    .toLocaleDateString("zh-CN", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    })
-    .replace(/\//g, "-");
-  mainOrder.venueTime = getVenueTime(venueTypes[venueType].venueTimes);
-  mainOrder.moneyAmount = venueTypes[venueType].moneyAmount;
+  if (orderId != "") {
+    mainOrder.orderId = orderId;
+  } else {
+    mainOrder.orderId = randOrderId(
+      (min = historyOrder[historyOrder.length - 1].orderId + 1)
+    );
+  }
+  if (vertifyCode != "") {
+    mainOrder.vertifyCode = vertifyCode;
+  } else {
+    mainOrder.vertifyCode = randVertifyCode();
+  }
+  if (venueName != "") {
+    mainOrder.venueName = venueName;
+  } else {
+    mainOrder.venueName = venueTypes[venueType].venueName;
+  }
+  if (venueId != "") {
+    mainOrder.venueId = venueId;
+  }
+  if (venueDate != "") {
+    mainOrder.venueDate = venueDate;
+  } else {
+    mainOrder.venueDate = new Date()
+      .toLocaleDateString("zh-CN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/\//g, "-");
+  }
+  if (venueTime != "") {
+    mainOrder.venueTime = venueTime;
+  } else {
+    mainOrder.venueTime = getVenueTime(venueTypes[venueType].venueTimes);
+  }
+  if (moneyAmount != "") {
+    mainOrder.moneyAmount = moneyAmount;
+  } else {
+    mainOrder.moneyAmount = venueTypes[venueType].moneyAmount;
+  }
 
   date = new Date();
 
@@ -239,7 +291,7 @@ function initPageData() {
     hour12: false,
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit"
+    second: "2-digit",
   });
 
   sessionStorage.setItem("venueType", venueType);
@@ -249,8 +301,53 @@ function initPageData() {
   sessionStorage.setItem("historyOrder", JSON.stringify(historyOrder));
 }
 
+var venueType = getURLParameter("venueType");
+var userName = getURLParameter("userName");
+var userId = getURLParameter("userId");
+var orderId = getURLParameter("orderId");
+var vertifyCode = getURLParameter("vertifyCode");
+var venueName = getURLParameter("venueName");
+var venueId = getURLParameter("venueId");
+var venueDate = getURLParameter("venueDate");
+var venueTime = getURLParameter("venueTime");
+var moneyAmount = getURLParameter("moneyAmount");
 
 if (sessionStorage.getItem("flag") != "1") {
-  initPageData();
+  initPageData(
+    venueType,
+    userName,
+    userId,
+    orderId,
+    vertifyCode,
+    venueName,
+    venueId,
+    venueDate,
+    venueTime,
+    moneyAmount
+  );
   sessionStorage.setItem("flag", "1");
+} else if (
+  venueType != "" ||
+  userName != "" ||
+  userId != "" ||
+  orderId != "" ||
+  vertifyCode != "" ||
+  venueName != "" ||
+  venueId != "" ||
+  venueDate != "" ||
+  venueTime != "" ||
+  moneyAmount != ""
+) {
+  initPageData(
+    venueType,
+    userName,
+    userId,
+    orderId,
+    vertifyCode,
+    venueName,
+    venueId,
+    venueDate,
+    venueTime,
+    moneyAmount
+  );
 }
